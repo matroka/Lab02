@@ -114,8 +114,16 @@ region_means
 
 ```{r Ex3, message = FALSE}
 # Write your code here to answer exercise 3
-
-
+plastic_data_all <- plastic_data_all |>
+  mutate(pct_mismanaged_plastic_ocean = (mismanaged_plastic_ocean / mismanaged_plastic) * 100) |>
+  drop_na()
+plastic_data_all
+plastic_data_all |>
+  group_by(region) |>
+  summarise(
+      med_pct_mis_plastic_ocean = median(pct_mismanaged_plastic_ocean)
+  ) |>
+  arrange(med_pct_mis_plastic_ocean)
 
 ```
 
