@@ -132,7 +132,19 @@ plastic_data_all |>
 
 ```{r Ex4, message = FALSE}
 # Write your code here to answer exercise 4
+library(dplyr)
 
-
-
+plastic_data_all <- plastic_data_all %>%
+rename(
+       pop = population
+)
+plastic_data_all <- plastic_data_all %>%
+  mutate(region = str_replace_all(region, "Latin America and The Caribbean", "LAC"))
+region_summary <- plastic_data_all %>%
+  group_by(region) %>%
+  summarize(
+    avg_total_mismanage_plastic = mean(total_mismanage_plastic, na.rm = TRUE),
+    avg_pop = mean(pop, na.rm = TRUE)
+  )
+print(region_summary)
 ```
