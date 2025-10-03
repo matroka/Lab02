@@ -453,7 +453,25 @@ frequency_table</code></pre>
 </div>
 <div id="ex-2." class="section level3">
 <h3>Ex 2.</h3>
-<pre class="r"><code># Write your code here to answer exercise 2</code></pre>
+<pre class="r"><code># Write your code here to answer exercise 2
+plastic_data_all &lt;- plastic_data_all %&gt;%
+  mutate(total_mismanage_plastic = mismanaged_plastic * population)
+
+region_means &lt;- plastic_data_all %&gt;%
+  group_by(region) %&gt;%
+  summarise(mean_total_mismanaged = mean(total_mismanage_plastic, na.rm = TRUE)) %&gt;%
+  arrange(desc(mean_total_mismanaged))
+
+region_means</code></pre>
+<pre><code>## # A tibble: 6 × 2
+##   region                          mean_total_mismanaged
+##   &lt;chr&gt;                                           &lt;dbl&gt;
+## 1 Asia                                         1026059.
+## 2 Africa                                        320729.
+## 3 Latin America and The Caribbean               193450.
+## 4 North America                                 147190.
+## 5 Europe                                         38180.
+## 6 Oceania                                        14577.</code></pre>
 </div>
 <div id="ex-3." class="section level3">
 <h3>Ex 3.</h3>
